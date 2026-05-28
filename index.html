@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yesid Fonseca— Desarrollador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── VARIABLES ── */
+    :root {
+      --bg:       #f3efef;
+      --surface:  #faf6f6;
+      --border:   #e9e3e3;
+      --text:     #0e0101;
+      --muted:    #888;
+      --accent:   #550ed8;
+      --accent2:  #550ed8;
+      --mono:     'Space Mono', monospace;
+      --sans:     'DM Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(241, 237, 237, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 6rem 2rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-content { width: 100%; }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.4s;
+    }
+
+    /* Efecto de escritura */
+    .typewriter {
+      display: inline-block;
+      color: var(--accent);
+      border-right: 3px solid var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 2s steps(30) forwards 1s, blink 0.8s step-end infinite 3s;
+    }
+
+    @keyframes typing {
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 550px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.6s;
+    }
+
+    .hero-links {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.8s;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+    }
+    .btn-primary:hover { background: #00cc6e; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--text); transform: translateY(-2px); }
+
+    /* ── SECCIONES ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    /* ── SOBRE MÍ ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .about-text p span { color: var(--text); }
+
+    .skills-title {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .skills-grid {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+
+    .skill-badge {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+      background: var(--surface);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-badge:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── PROYECTO ── */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5rem;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: var(--accent2); }
+
+    .project-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .project-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .project-status {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .project-tech {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      background: rgba(0,255,136,0.08);
+      color: var(--accent);
+      border: 1px solid rgba(0,255,136,0.2);
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+    }
+
+    .project-team {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
+    .team-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+
+    .team-members {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+
+    .team-member {
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+      border-radius: 3px;
+    }
+
+    /* ── CONTACTO ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .contact-item:hover { border-color: var(--accent2); transform: translateY(-2px); }
+
+    .contact-icon {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent2);
+      min-width: 20px;
+    }
+
+    .contact-info { display: flex; flex-direction: column; }
+    .contact-label { font-size: 0.72rem; color: var(--muted); font-family: var(--mono); }
+    .contact-value { font-size: 0.9rem; font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMACIONES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">// @yesidzabala123-cmd</a>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#proyecto">Proyecto</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-content">
+      <p class="hero-tag">// SENA CTM Itagüí · ADSO · 2026</p>
+      <!-- CAMBIAR: Tu nombre completo -->
+      <h1 class="hero-name">
+        Hola, soy<br>
+        <span class="typewriter">Yesid Fonseca</span>
+      </h1>
+      <!-- CAMBIAR: Tu rol de roadmap.sh y descripción -->
+      <p class="hero-desc">
+        Estudiante de Análisis y Desarrollo de Software.
+        Me interesa el <strong style="color:var(--text)">desarrollo Full Stack</strong>
+        y la construcción de herramientas que resuelven problemas reales.
+      </p>
+      <div class="hero-links">
+        <!-- CAMBIAR: Tu usuario de GitHub -->
+        <a href="https://github.com/yesidzabala123-cmd" target="_blank" class="btn btn-primary">Ver GitHub</a>
+        <a href="#proyecto" class="btn btn-outline">Ver proyecto</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre-mi">
+    <p class="section-label">// 01</p>
+    <h2 class="section-title">Sobre mí</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <!-- CAMBIAR: Tu presentación personal -->
+        <p>Soy aprendiz de ADSO en el SENA CTM Itagüí. Me apasiona construir software que solucione problemas reales.</p>
+        <p>Actualmente explorando el rol de <span>Backend Developer</span> según roadmap.sh — trabajando con Python, bases de datos y APIs.</p>
+        <p>Creo que el mejor código es el que <span>resuelve un problema concreto</span> de forma simple.</p>
+      </div>
+      <div>
+        <p class="skills-title">// Tecnologías que estoy aprendiendo</p>
+        <div class="skills-grid">
+          <!-- CAMBIAR: Tus tecnologías -->
+          <span class="skill-badge">Python</span>
+          <span class="skill-badge">HTML</span>
+          <span class="skill-badge">CSS</span>
+          <span class="skill-badge">JavaScript</span>
+          <span class="skill-badge">MySQL</span>
+          <span class="skill-badge">Git</span>
+          <span class="skill-badge">GitHub</span>
+          <span class="skill-badge">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTO -->
+  <section id="proyecto">
+    <p class="section-label">// 02</p>
+    <h2 class="section-title">Mi proyecto</h2>
+    <div class="project-card">
+      <div class="project-header">
+        <!-- CAMBIAR: Nombre del proyecto -->
+        <h3 class="project-name">GolBet</h3>
+        <span class="project-status">En desarrollo</span>
+      </div>
+      <!-- CAMBIAR: Descripción del proyecto -->
+      <p class="project-desc">
+        Este proyecto 
+      </p>
+      <div class="project-tech">
+        <!-- CAMBIAR: Tecnologías del proyecto -->
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">MySQL</span>
+      </div>
+      <div class="project-team">
+        <p class="team-label">// Equipo</p>
+        <div class="team-members">
+          <!-- CAMBIAR: Nombres del equipo -->
+          <span class="team-member">Yesid Fonseca</span>
+          <span class="team-member">Michael Usme</span>
+          <span class="team-member">Geraldine</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <p class="section-label">// 03</p>
+    <h2 class="section-title">Contacto</h2>
+    <div class="contact-grid">
+      <!-- CAMBIAR: Tu usuario de GitHub -->
+      <a href="https://github.com/yesidzabala123-cmd" target="_blank" class="contact-item">
+        <span class="contact-icon">GH</span>
+        <div class="contact-info">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">yesidzabala123-cmd</span>
+        </div>
+      </a>
+      <!-- CAMBIAR: Tu correo -->
+      <a href="mailto:tucorreo@ejemplo.com" class="contact-item">
+        <span class="contact-icon">@</span>
+        <div class="contact-info">
+          <span class="contact-label">Correo</span>
+          <span class="contact-value">yesidzabala123@gmail.com</span>
+        </div>
+      </a>
+      <!-- OPCIONAL: LinkedIn -->
+      <!-- <a href="https://linkedin.com/in/tu-usuario" target="_blank" class="contact-item">
+        <span class="contact-icon">LI</span>
+        <div class="contact-info">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value"></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Construido con HTML, CSS y JS · Desplegado en GitHub Pages · 2026</p>
+  </footer>
+
+</body>
+</html>
